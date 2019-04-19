@@ -58,7 +58,6 @@ func main() {
 
 func indexHandler(res http.ResponseWriter, req *http.Request) {
 	etag := genEtag(req)
-	res.Header().Set("X-Etag", etag)
 
 	switch req.Method {
 	case http.MethodGet:
@@ -85,7 +84,6 @@ func trackerHandler(res http.ResponseWriter, req *http.Request) {
 
 	res.Header().Set("Cache-Control", "no-cache")
 	res.Header().Set("Etag", etag)
-	res.Header().Set("X-Etag", etag)
 	res.Header().Set("Content-Type", "image/jpeg")
 	// res.Header().Set("Content-Length", 0)
 
