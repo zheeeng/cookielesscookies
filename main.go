@@ -107,7 +107,13 @@ func genEtag(req *http.Request) string {
 		return s3[0:18]
 	}
 
-	s1 := sha1Sum(req.RemoteAddr)
+	remoteAddr := req.Header.Get("x-forwarded-for")
+
+	if remoteAddr == "" {
+		remoteAddr = req.RemoteAddr
+	}
+
+	s1 := sha1Sum(remoteAddr)
 	s2 := sha1Sum(req.Header.Get("User-Agent"))
 	s3 := sha1Sum(secret + s1 + s2)
 
