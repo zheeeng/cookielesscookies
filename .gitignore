@@ -13,3 +13,6 @@
 
 # Misc
 tmp
+
+// go vendor
+vendor/*/
